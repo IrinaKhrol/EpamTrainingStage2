@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace BasicOfNETFrameworkAndCSharpWithUnitTests
 {
-    public class Message
+    public static class Message
     {
         public static int GetMaxConsecutiveDifferentCharacters(string s)
         {
