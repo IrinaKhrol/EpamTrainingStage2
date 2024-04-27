@@ -1,24 +1,25 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+
 
 namespace Driver
 {
     public class BasePage
     {
+        protected WebDriverWait wait;
         protected IWebDriver driver;
 
         public BasePage()
         {
             driver = new ChromeDriver();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         protected void ClickElement(By locator) 
         {
+            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
             driver.FindElement(locator).Click();
         }
 
