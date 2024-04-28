@@ -4,14 +4,16 @@ namespace Driver
 {
     public class MainPage : BasePage
     {
+
+
         protected By AcceptPrivacy => By.CssSelector("button[mode='primary']");
-        protected By Addtext => By.Id("postform-text");
+        protected By Addtext => By.CssSelector(".textarea.-form.js-paste-code");
         protected By AddName => By.Id("postform-name");
         protected By PasteExpirationDropdown => By.Id("select2-postform-expiration-container");
         protected By PasteExpirationOption => By.CssSelector(".select2-results__option[id*='10M']");
         protected By CreateNewPasteButton => By.CssSelector("button[type='submit']");
 
-        public MainPage(): base()
+        public MainPage() : base()
         {
             driver.Url = "https://pastebin.com/";
             driver.Manage().Window.Maximize();
@@ -22,8 +24,7 @@ namespace Driver
         {
             ClickElement(AcceptPrivacy);
         }
-
-        public void AddText(string text) 
+        public void AddText(string text)
         {
             EnterText(Addtext, text);
         }
@@ -41,8 +42,9 @@ namespace Driver
 
         public void CreateNewPaste()
         {
-            ClickElement(CreateNewPasteButton); 
+            ClickElement(CreateNewPasteButton);
         }
+
 
         public void QuitDriver()
         {

@@ -17,7 +17,7 @@ namespace Driver
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
-        protected void ClickElement(By locator) 
+        protected void ClickElement(By locator)
         {
             wait.Until(ExpectedConditions.ElementToBeClickable(locator));
             driver.FindElement(locator).Click();
@@ -27,6 +27,6 @@ namespace Driver
         {
             driver.FindElement(locator).SendKeys(text);
         }
-    }
 
+    }
 }
