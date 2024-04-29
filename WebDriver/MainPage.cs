@@ -1,51 +1,64 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using System.Xml.Linq;
 
 namespace Driver
 {
     public class MainPage : BasePage
     {
+        protected By SearchIcon => By.CssSelector("div.YSM5S");
+        protected By SearchField => By.CssSelector("input.mb2a7b");
+        protected By PricingCalculatorLink => By.XPath("//a[contains(text(),'Google Cloud Platform Pricing Calculator')]");
 
+        protected By PricingCalculator = By.CssSelector("a.gs-title[href*='cloud.google.com/products/calculator']");
 
-        protected By AcceptPrivacy => By.CssSelector("button[mode='primary']");
-        protected By Addtext => By.CssSelector(".textarea.-form.js-paste-code");
-        protected By AddName => By.Id("postform-name");
-        protected By PasteExpirationDropdown => By.Id("select2-postform-expiration-container");
-        protected By PasteExpirationOption => By.CssSelector(".select2-results__option[id*='10M']");
-        protected By CreateNewPasteButton => By.CssSelector("button[type='submit']");
+        protected By AddToEstimateButton = By.CssSelector("span.UywwFc-vQzf8d[jsname='V67aGc']");
 
-        public MainPage() : base()
+        protected By ComputeEngineItem = By.CssSelector("div[data-service-form='8']");
+
+        protected By NumberOfInstances = By.CssSelector("div[jsaction='JIbuQc:qGgAE'] button");
+
+        protected By MashineType = By.CssSelector("div[jsname=kgDJk]");
+
+        public MainPage(IWebDriver driver) : base(driver)
         {
-            driver.Url = "https://pastebin.com/";
+            driver.Url = "https://cloud.google.com/";
             driver.Manage().Window.Maximize();
-            ClickAcceptPrivacy();
         }
 
-        private void ClickAcceptPrivacy()
+        public SearchResultPage AddTextToSearchField(string text)
         {
-            ClickElement(AcceptPrivacy);
+            EnterText(SearchField, text);
+            return new SearchResultPage(driver);
         }
-        public void AddText(string text)
+
+        public void ClickAddToEstimateButton()
         {
-            EnterText(Addtext, text);
+            ClickElement(AddToEstimateButton);
         }
 
-        public void SetPasteExpiration()
+        public void ClickComputeEngineItem()
         {
-            ClickElement(PasteExpirationDropdown);
-            ClickElement(PasteExpirationOption);
+            ClickElement(ComputeEngineItem);
         }
 
-        public void SetPasteName(string name)
+        public void ClickNumberOfInstances(int count)
         {
-            EnterText(AddName, name);
-        }
 
-        public void CreateNewPaste()
+            for (int i = 0; i < count; i++)
+            {
+                ClickElement(NumberOfInstances);
+            }
+        }
+        public void ClickMashineType()
         {
-            ClickElement(CreateNewPasteButton);
+            //IWebElement element = driver.FindElement(MashineType);
+            //Actions actions = new Actions(driver);
+            //actions.MoveToElement(element);
+            // actions.Perform();
+            ScrollDown();
+            ClickElement(MashineType);
         }
-
-
         public void QuitDriver()
         {
             driver.Quit();

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -11,9 +12,9 @@ namespace Driver
         protected WebDriverWait wait;
         protected IWebDriver driver;
 
-        public BasePage()
+        public BasePage(IWebDriver driver)
         {
-            driver = new ChromeDriver();
+            this.driver = driver;
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -26,7 +27,12 @@ namespace Driver
         protected void EnterText(By locator, string text)
         {
             driver.FindElement(locator).SendKeys(text);
+            driver.FindElement(locator).SendKeys(Keys.Enter);
         }
 
+        protected void ScrollDown() 
+        {
+            new Actions(driver).SendKeys(Keys.PageDown).Build().Perform();
+        }
     }
 }

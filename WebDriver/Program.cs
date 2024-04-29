@@ -1,18 +1,20 @@
 ﻿
+using OpenQA.Selenium.Chrome;
+
 namespace Driver
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            var mainpage = new MainPage();
-            mainpage.AddText(" git config --global user.name  \"New Sheriff in Town\"\r\n " +
-                             "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\r\n " +
-                             "git push origin master --force\r\n");
-            mainpage.SetPasteExpiration();
-            mainpage.SetPasteName("how to gain dominance among developers");
-            mainpage.CreateNewPaste();
-            mainpage.QuitDriver();
+            var mainpage = new MainPage(new ChromeDriver());
+            var searchResult = mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
+            searchResult.ClickPricingCalculatorLink();
+            mainpage.ClickAddToEstimateButton();
+            mainpage.ClickComputeEngineItem();
+            mainpage.ClickNumberOfInstances(3);
+            mainpage.ClickMashineType();
+            //mainpage.QuitDriver();
 
         }
     }
