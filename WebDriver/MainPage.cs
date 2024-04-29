@@ -4,8 +4,6 @@ namespace Driver
 {
     public class MainPage : BasePage
     {
-
-
         protected By AcceptPrivacy => By.CssSelector("button[mode='primary']");
         protected By Addtext => By.CssSelector(".textarea.-form.js-paste-code");
         protected By AddName => By.Id("postform-name");
@@ -44,7 +42,6 @@ namespace Driver
         {
             ClickElement(CreateNewPasteButton);
         }
-
 
         public void QuitDriver()
         {

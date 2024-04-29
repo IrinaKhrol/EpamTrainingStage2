@@ -18,7 +18,7 @@ namespace UnitTestWebDriver
         }
 
         [Test]
-        public void VerifyPageTitleMatchesPasteName()
+        public void VerifyPageDoesNotMatchesPasteName()
         {
             string expectedTitle = "";
             mainpage.SetPasteName(expectedTitle);
@@ -28,7 +28,7 @@ namespace UnitTestWebDriver
         }
 
         [Test]
-        public void VerifyBrowserMatches()
+        public void VerifyBrowserDoesNotMatchesUrl()
         {
             string expectedUrl = "data:,";
 

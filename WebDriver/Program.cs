@@ -13,7 +13,6 @@ namespace Driver
             mainpage.SetPasteName("how to gain dominance among developers");
             mainpage.CreateNewPaste();
             mainpage.QuitDriver();
-
         }
     }
 }
