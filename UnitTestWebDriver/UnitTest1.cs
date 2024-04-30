@@ -1,6 +1,7 @@
 ﻿using Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace UnitTestWebDriver
 {
@@ -18,19 +19,22 @@ namespace UnitTestWebDriver
         }
 
         [Test]
-        public void VerifyPageDoesNotMatchesPasteName()
+        public void VerifyPageName()
         {
-            string expectedTitle = "";
-            mainpage.SetPasteName(expectedTitle);
+            string expectedAddText = "how to gain dominance among developers";
+            mainpage.SetPasteName(expectedAddText);
 
-            string actualTitle = driver.Title;
-            Assert.That(actualTitle, Is.EqualTo(expectedTitle), "Page title does not match the paste name");
+            string actualText = mainpage.GetPasteName();
+            // Сравниваем ожидаемый текст с фактическим
+            Assert.AreEqual(expectedAddText, actualText, "Текст не соответствует ожидаемому значению");
         }
 
         [Test]
-        public void VerifyBrowserDoesNotMatchesUrl()
+        public void VerifyBrowserMatchesUrl()
         {
-            string expectedUrl = "data:,";
+            string expectedUrl = "https://0bin.net/";
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             string actualUrl = driver.Url;
 

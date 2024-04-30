@@ -11,7 +11,7 @@ namespace Driver
                              "git push origin master --force\r\n");
             mainpage.SetPasteExpiration();
             mainpage.SetPasteName("how to gain dominance among developers");
-            mainpage.CreateNewPaste();
+            mainpage.ClickButton();
             mainpage.QuitDriver();
         }
     }
