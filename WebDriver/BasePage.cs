@@ -28,5 +28,16 @@ namespace Driver
             driver.FindElement(locator).SendKeys(text);
         }
 
+        protected string GetNameAttribute(By locator) 
+        {
+            return driver.FindElement(locator).GetAttribute("value");
+        }
+
+        protected string GetText(By locator) 
+        {
+            wait.Until(ExpectedConditions.ElementExists(locator));
+            return driver.FindElement(locator).GetAttribute("textContent");
+        }
+
     }
 }

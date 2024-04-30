@@ -1,7 +1,6 @@
 ﻿using Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 
 namespace UnitTestWebDriver
 {
@@ -25,20 +24,23 @@ namespace UnitTestWebDriver
             mainpage.SetPasteName(expectedAddText);
 
             string actualText = mainpage.GetPasteName();
-            // Сравниваем ожидаемый текст с фактическим
-            Assert.AreEqual(expectedAddText, actualText, "Текст не соответствует ожидаемому значению");
+            Assert.That(actualText, Is.EqualTo(expectedAddText), "");
         }
 
         [Test]
-        public void VerifyBrowserMatchesUrl()
+        public void VerifyAddText()
         {
-            string expectedUrl = "https://0bin.net/";
+            string expectedResult = " git config --global user.name  \"New Sheriff in Town\"\r\n " +
+                                    "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\r\n " +
+                                    "git push origin master --force\r\n";
+            mainpage.AddText(expectedResult);
+            mainpage.SetPasteExpiration();
+            mainpage.SetPasteName("how to gain dominance among developers");
+            mainpage.ClickSubmitButton();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            string actualResult = mainpage.GetCode();
 
-            string actualUrl = driver.Url;
-
-            Assert.That(actualUrl, Is.EqualTo(expectedUrl), "Browser does not match expected URL");
+            Assert.That(actualResult, Is.EqualTo(expectedResult), "Text in the paste does not match the expected result");
         }
 
         [TearDown]

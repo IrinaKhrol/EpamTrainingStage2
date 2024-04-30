@@ -7,8 +7,8 @@ namespace Driver
         protected By Addtext => By.Id("content");
         protected By ExpirationOption => By.CssSelector("#expiration option[value='never']");
         protected By AddName => By.CssSelector("input[name='paste-excerpt']");
-
-        protected By SubmitButton = By.XPath("//*[@id=\"main\"]/form/div[1]/div[2]/div/div/button");
+        protected By SubmitButton => By.XPath("//*[@id=\"main\"]/form/div[1]/div[2]/div/div/button");
+        protected By SaveCode => By.XPath("//pre[@id='paste-content'][contains(text(), 'git config --global user.name  \"New Sheriff in Town\"')]\r\n");
 
         public MainPage() : base()
         {
@@ -33,14 +33,15 @@ namespace Driver
 
         public string GetPasteName()
         {
-
-            string text = element.GetAttribute("value");
-
-            // Возвращаем полученный текст
-            return text;
+            return GetNameAttribute(AddName);
         }
 
-        public void ClickButton()
+        public string GetCode() 
+        {
+            return GetText(SaveCode);
+        }
+
+        public void ClickSubmitButton()
         {
             ClickElement(SubmitButton);
         }
