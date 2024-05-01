@@ -1,0 +1,42 @@
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
+
+namespace Driver
+{
+    public class BasePage
+    {
+        protected WebDriverWait wait;
+        protected IWebDriver driver;
+
+        public BasePage()
+        {
+            driver = new ChromeDriver();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
+        protected void ClickElement(By locator)
+        {
+            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+            driver.FindElement(locator).Click();
+        }
+
+        protected void EnterText(By locator, string text)
+        {
+            driver.FindElement(locator).SendKeys(text);
+        }
+
+        protected string GetNameAttribute(By locator) 
+        {
+            return driver.FindElement(locator).GetAttribute("value");
+        }
+
+        protected string GetText(By locator) 
+        {
+            wait.Until(ExpectedConditions.ElementExists(locator));
+            return driver.FindElement(locator).Text;
+        }
+
+    }
+}
