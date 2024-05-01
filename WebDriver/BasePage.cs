@@ -3,7 +3,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-
 namespace Driver
 {
     public class BasePage
@@ -36,7 +35,7 @@ namespace Driver
         protected string GetText(By locator) 
         {
             wait.Until(ExpectedConditions.ElementExists(locator));
-            return driver.FindElement(locator).GetAttribute("textContent");
+            return driver.FindElement(locator).Text;
         }
 
     }
