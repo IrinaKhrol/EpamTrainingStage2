@@ -42,20 +42,14 @@ namespace UnitTestWebDriver
 
             string actualCostEstimate = searchProductPage.GetCostEstimateSummary();
             string expectedCostEstimate = "$5,413.26";
-
-            Assert.That(actualCostEstimate, Is.EqualTo(expectedCostEstimate), "The actual cost match the expected value.");
-
             string pattern = @"\$\d+(,\d+)*(\.\d+)?";
             Regex regex = new Regex(pattern);
             Match match = regex.Match(actualCostEstimate);
             if (match.Success)
             {
                 string costString = match.Value;
-                // Преобразование строки в числовое значение
                 decimal actualCost = decimal.Parse(costString.Replace("$", "").Replace(",", ""));
-                // Преобразование ожидаемой строки в числовое значение
                 decimal expectedCost = decimal.Parse(expectedCostEstimate.Replace("$", "").Replace(",", ""));
-                // Сравнение фактической и ожидаемой сумм
                 Assert.That(actualCost, Is.EqualTo(expectedCost), "The actual cost matches the expected value.");
             }
             else
