@@ -27,12 +27,21 @@ namespace Driver
         protected void EnterText(By locator, string text)
         {
             driver.FindElement(locator).SendKeys(text);
+        }
+
+        protected void ClickEnter(By locator) 
+        {
             driver.FindElement(locator).SendKeys(Keys.Enter);
         }
 
         protected void ScrollDown() 
         {
             new Actions(driver).SendKeys(Keys.PageDown).Build().Perform();
+        }
+
+        protected void HideCookieNotification()
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("document.getElementsByClassName('glue-cookie-notification-bar')[0].style.display = 'none';");
         }
     }
 }

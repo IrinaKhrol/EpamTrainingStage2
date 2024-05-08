@@ -1,46 +1,74 @@
 ﻿using Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Text.RegularExpressions;
 
 namespace UnitTestWebDriver
 {
     [TestFixture]
-    public class Tests
+    public class CalculatorTests
     {
         public IWebDriver driver;
         public MainPage mainpage;
+
 
         [SetUp]
         public void Setup()
         {
             driver = new ChromeDriver();
-            mainpage = new MainPage();
+            mainpage = new MainPage(driver);
         }
 
         [Test]
-        public void VerifyPageTitleMatchesPasteName()
+        public void TestCalculatorPriceAndSummary()
         {
-            string expectedTitle = "";
-            mainpage.SetPasteName(expectedTitle);
+            mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
+            var searchResult = mainpage.OpenSurchResult();
+            searchResult.ClickPricingCalculatorLink();
+            SearchProductPage searchProductPage = new SearchProductPage(driver);
+            searchProductPage.ClickAddToEstimateButton();
+            searchProductPage.ClickComputeEngineItem();
+            searchProductPage.ClickNumberOfInstances(3);
+            searchProductPage.ClickMashineType();
+            searchProductPage.ClickChooseMashineType();
+            searchProductPage.ClickSelectAddGps();
+            searchProductPage.ClickChooseGPUType();
+            searchProductPage.AddGPUType();
+            searchProductPage.ClickChooseLocalSSD();
+            searchProductPage.ClickCommitedUsage();
+            searchProductPage.AddLocalSSD();
+            searchProductPage.ClickShare();
+            searchProductPage.ClickOpenEstimate();
 
-            string actualTitle = driver.Title;
-            Assert.That(actualTitle, Is.EqualTo(expectedTitle), "Page title does not match the paste name");
-        }
+            string actualCostEstimate = searchProductPage.GetCostEstimateSummary();
+            string expectedCostEstimate = "$5,413.26";
 
-        [Test]
-        public void VerifyBrowserMatches()
-        {
-            string expectedUrl = "data:,";
+            Assert.That(actualCostEstimate, Is.EqualTo(expectedCostEstimate), "The actual cost match the expected value.");
 
-            string actualUrl = driver.Url;
+            string pattern = @"\$\d+(,\d+)*(\.\d+)?";
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(actualCostEstimate);
+            if (match.Success)
+            {
+                string costString = match.Value;
+                // Преобразование строки в числовое значение
+                decimal actualCost = decimal.Parse(costString.Replace("$", "").Replace(",", ""));
+                // Преобразование ожидаемой строки в числовое значение
+                decimal expectedCost = decimal.Parse(expectedCostEstimate.Replace("$", "").Replace(",", ""));
+                // Сравнение фактической и ожидаемой сумм
+                Assert.That(actualCost, Is.EqualTo(expectedCost), "The actual cost matches the expected value.");
+            }
+            else
+            {
+                Assert.Fail("Failed to extract cost from the summary.");
+            }
 
-            Assert.That(actualUrl, Is.EqualTo(expectedUrl), "Browser does not match expected URL");
         }
 
         [TearDown]
         public void TearDown()
         {
-            mainpage.QuitDriver();
+            driver.Quit();
         }
     }
 }

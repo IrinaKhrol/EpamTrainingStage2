@@ -1,6 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System.Xml.Linq;
 
 namespace Driver
 {
@@ -10,54 +8,21 @@ namespace Driver
         protected By SearchField => By.CssSelector("input.mb2a7b");
         protected By PricingCalculatorLink => By.XPath("//a[contains(text(),'Google Cloud Platform Pricing Calculator')]");
 
-        protected By PricingCalculator = By.CssSelector("a.gs-title[href*='cloud.google.com/products/calculator']");
-
-        protected By AddToEstimateButton = By.CssSelector("span.UywwFc-vQzf8d[jsname='V67aGc']");
-
-        protected By ComputeEngineItem = By.CssSelector("div[data-service-form='8']");
-
-        protected By NumberOfInstances = By.CssSelector("div[jsaction='JIbuQc:qGgAE'] button");
-
-        protected By MashineType = By.CssSelector("div[jsname=kgDJk]");
-
         public MainPage(IWebDriver driver) : base(driver)
         {
             driver.Url = "https://cloud.google.com/";
             driver.Manage().Window.Maximize();
         }
 
-        public SearchResultPage AddTextToSearchField(string text)
+        public SearchResultPage OpenSurchResult()
         {
-            EnterText(SearchField, text);
+            ClickEnter(SearchField);
             return new SearchResultPage(driver);
         }
 
-        public void ClickAddToEstimateButton()
+        public void AddTextToSearchField(string text)
         {
-            ClickElement(AddToEstimateButton);
-        }
-
-        public void ClickComputeEngineItem()
-        {
-            ClickElement(ComputeEngineItem);
-        }
-
-        public void ClickNumberOfInstances(int count)
-        {
-
-            for (int i = 0; i < count; i++)
-            {
-                ClickElement(NumberOfInstances);
-            }
-        }
-        public void ClickMashineType()
-        {
-            //IWebElement element = driver.FindElement(MashineType);
-            //Actions actions = new Actions(driver);
-            //actions.MoveToElement(element);
-            // actions.Perform();
-            ScrollDown();
-            ClickElement(MashineType);
+            EnterText(SearchField, text);
         }
         public void QuitDriver()
         {
