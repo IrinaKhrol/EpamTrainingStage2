@@ -1,19 +1,9 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Driver
 {
-    public class SearchProductPage : BasePage
+    public class ComputeEnginePage : BasePage
     {
-
-        protected By AddToEstimateButton = By.CssSelector("span.UywwFc-vQzf8d[jsname='V67aGc']");
-
-        protected By ComputeEngineItem = By.CssSelector("div[data-service-form='8']");
-
         protected By NumberOfInstances = By.CssSelector("div[jsaction='JIbuQc:qGgAE'] button");
 
         protected By MashineType = By.CssSelector("div[jsname=kgDJk]");
@@ -36,22 +26,14 @@ namespace Driver
 
         protected By OpenEstimate = By.CssSelector("a.tltOzc.MExMre.rP2xkc.jl2ntd[track-name='open estimate summary']");
 
-        protected By CostEstimateSummaryLocator = By.XPath("//h6[contains(text(), 'Cost Estimate Summary')]/following-sibling::h6");
+        protected By Cost = By.CssSelector("label.gt0C8e.MyvX5d.D0aEmf");
 
-
-        public void ClickAddToEstimateButton()
+        public ComputeEnginePage(IWebDriver driver) : base(driver)
         {
-            ClickElement(AddToEstimateButton);
-        }
-
-        public void ClickComputeEngineItem()
-        {
-            ClickElement(ComputeEngineItem);
         }
 
         public void ClickNumberOfInstances(int count)
         {
-
             for (int i = 0; i < count; i++)
             {
                 ClickElement(NumberOfInstances);
@@ -113,15 +95,9 @@ namespace Driver
             ClickElement(OpenEstimate);
         }
 
-        public string GetCostEstimateSummary()
+        public string GetCost() 
         {
-            return driver.FindElement(CostEstimateSummaryLocator).Text;
-        }
-
-
-
-        public SearchProductPage(IWebDriver driver) : base(driver)
-        {
+            return driver.FindElement(Cost).Text;
         }
     }
 }

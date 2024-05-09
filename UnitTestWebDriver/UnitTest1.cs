@@ -1,7 +1,6 @@
 ﻿using Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Text.RegularExpressions;
 
 namespace UnitTestWebDriver
 {
@@ -24,39 +23,29 @@ namespace UnitTestWebDriver
         {
             mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
             var searchResult = mainpage.OpenSurchResult();
-            searchResult.ClickPricingCalculatorLink();
-            SearchProductPage searchProductPage = new SearchProductPage(driver);
-            searchProductPage.ClickAddToEstimateButton();
-            searchProductPage.ClickComputeEngineItem();
-            searchProductPage.ClickNumberOfInstances(3);
-            searchProductPage.ClickMashineType();
-            searchProductPage.ClickChooseMashineType();
-            searchProductPage.ClickSelectAddGps();
-            searchProductPage.ClickChooseGPUType();
-            searchProductPage.AddGPUType();
-            searchProductPage.ClickChooseLocalSSD();
-            searchProductPage.ClickCommitedUsage();
-            searchProductPage.AddLocalSSD();
-            searchProductPage.ClickShare();
-            searchProductPage.ClickOpenEstimate();
+            var welcomePricingCalcilator = searchResult.ClickPricingCalculatorLink();
+            welcomePricingCalcilator.ClickAddToEstimateButton();
+            var computeEnginePage = welcomePricingCalcilator.ClickComputeEngineItem();
+            computeEnginePage.ClickNumberOfInstances(3);
+            computeEnginePage.ClickMashineType();
+            computeEnginePage.ClickChooseMashineType();
+            computeEnginePage.ClickSelectAddGps();
+            computeEnginePage.ClickChooseGPUType();
+            computeEnginePage.AddGPUType();
+            computeEnginePage.ClickChooseLocalSSD();
+            computeEnginePage.AddLocalSSD();
+            computeEnginePage.ClickCommitedUsage();
+            Thread.Sleep(1000);
+            var expectedCost = computeEnginePage.GetCost();
+            computeEnginePage.ClickShare();
+            computeEnginePage.ClickOpenEstimate();
 
-            string actualCostEstimate = searchProductPage.GetCostEstimateSummary();
-            string expectedCostEstimate = "$5,413.26";
-            string pattern = @"\$\d+(,\d+)*(\.\d+)?";
-            Regex regex = new Regex(pattern);
-            Match match = regex.Match(actualCostEstimate);
-            if (match.Success)
-            {
-                string costString = match.Value;
-                decimal actualCost = decimal.Parse(costString.Replace("$", "").Replace(",", ""));
-                decimal expectedCost = decimal.Parse(expectedCostEstimate.Replace("$", "").Replace(",", ""));
-                Assert.That(actualCost, Is.EqualTo(expectedCost), "The actual cost matches the expected value.");
-            }
-            else
-            {
-                Assert.Fail("Failed to extract cost from the summary.");
-            }
+            EstimateSummaryPage estimateSummaryPage = new EstimateSummaryPage(driver);
+            estimateSummaryPage.SwitchToTabWithTitle("Estimate");
 
+            string actualCostEstimate = estimateSummaryPage.GetCostEstimateSummary();
+
+            Assert.That(actualCostEstimate, Is.EqualTo(expectedCost), "The actual cost match the expected value.");
         }
 
         [TearDown]

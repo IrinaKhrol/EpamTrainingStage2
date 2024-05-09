@@ -6,9 +6,10 @@ namespace Driver
     {
         protected By PricingCalculator = By.CssSelector("a.gs-title[href*='cloud.google.com/products/calculator']");
 
-        public void ClickPricingCalculatorLink()
+        public WelcomePricingCalculator ClickPricingCalculatorLink()
         {
             ClickElement(PricingCalculator);
+            return new WelcomePricingCalculator(driver);
         }
 
         public SearchResultPage(IWebDriver driver) : base(driver)

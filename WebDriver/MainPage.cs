@@ -24,6 +24,7 @@ namespace Driver
         {
             EnterText(SearchField, text);
         }
+
         public void QuitDriver()
         {
             driver.Quit();
