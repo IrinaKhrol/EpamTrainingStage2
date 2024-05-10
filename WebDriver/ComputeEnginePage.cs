@@ -28,7 +28,7 @@ namespace Driver
 
         protected By Cost = By.CssSelector("label.gt0C8e.MyvX5d.D0aEmf");
 
-        public ComputeEnginePage(IWebDriver driver) : base(driver)
+        public ComputeEnginePage(WebDriverManager driverManager) : base(driverManager)
         {
         }
 
@@ -36,68 +36,69 @@ namespace Driver
         {
             for (int i = 0; i < count; i++)
             {
-                ClickElement(NumberOfInstances);
+                DriverManager.ClickElement(NumberOfInstances);
             }
         }
 
         public void ClickMashineType()
         {
-            ScrollDown();
-            HideCookieNotification();
-            ClickElement(MashineType);
+            DriverManager.ScrollDown();
+            DriverManager.HideCookieNotification();
+            DriverManager.ClickElement(MashineType);
         }
 
         public void ClickChooseMashineType()
         {
-            ClickElement(ChooseMashineType);
+            DriverManager.ClickElement(ChooseMashineType);
         }
 
         public void ClickSelectAddGps()
         {
-            ScrollDown();
-            HideCookieNotification();
+            DriverManager.ScrollDown();
+            DriverManager.HideCookieNotification();
             Thread.Sleep(1000);
-            ClickElement(SelectAddGPUs);
+            DriverManager.ClickElement(SelectAddGPUs);
         }
 
         public void ClickChooseGPUType()
         {
-            ClickElement(ClickGPUType);
+            DriverManager.ClickElement(ClickGPUType);
         }
 
         public void AddGPUType()
         {
-            ClickElement(ChooseGPUType);
+            DriverManager.ClickElement(ChooseGPUType);
         }
 
         public void ClickChooseLocalSSD()
         {
-            ClickElement(ClickLocalSSD);
+            DriverManager.ClickElement(ClickLocalSSD);
         }
 
         public void AddLocalSSD()
         {
-            ClickElement(ChooseLocalSSD);
+            DriverManager.ClickElement(ChooseLocalSSD);
         }
 
         public void ClickCommitedUsage()
         {
-            ClickElement(ChooseCommitedUsage);
+            DriverManager.ClickElement(ChooseCommitedUsage);
         }
 
         public void ClickShare()
         {
-            ClickElement(Share);
+            DriverManager.ClickElement(Share);
         }
 
-        public void ClickOpenEstimate()
+        public EstimateSummaryPage ClickOpenEstimate()
         {
-            ClickElement(OpenEstimate);
+            DriverManager.ClickElement(OpenEstimate);
+            return new EstimateSummaryPage(DriverManager);
         }
 
         public string GetCost() 
         {
-            return driver.FindElement(Cost).Text;
+            return DriverManager.GetText(Cost);
         }
     }
 }

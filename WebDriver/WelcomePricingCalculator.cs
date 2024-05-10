@@ -8,19 +8,19 @@ namespace Driver
 
         protected By ComputeEngineItem = By.CssSelector("div[data-service-form='8']");
 
-        public WelcomePricingCalculator(IWebDriver driver) : base(driver)
+        public WelcomePricingCalculator(WebDriverManager driverManager) : base(driverManager)
         {
         }
 
         public void ClickAddToEstimateButton()
         {
-            ClickElement(AddToEstimateButton);
+            DriverManager.ClickElement(AddToEstimateButton);
         }
 
         public ComputeEnginePage ClickComputeEngineItem()
         {
-            ClickElement(ComputeEngineItem);
-            return  new ComputeEnginePage(driver);
+            DriverManager.ClickElement(ComputeEngineItem);
+            return  new ComputeEnginePage(DriverManager);
         }
     }
 }

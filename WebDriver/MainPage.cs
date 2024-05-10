@@ -8,26 +8,20 @@ namespace Driver
         protected By SearchField => By.CssSelector("input.mb2a7b");
         protected By PricingCalculatorLink => By.XPath("//a[contains(text(),'Google Cloud Platform Pricing Calculator')]");
 
-        public MainPage(IWebDriver driver) : base(driver)
+        public MainPage(WebDriverManager driverManager) : base(driverManager)
         {
-            driver.Url = "https://cloud.google.com/";
-            driver.Manage().Window.Maximize();
+            DriverManager.NavigateToUrl("https://cloud.google.com/");
         }
 
         public SearchResultPage OpenSurchResult()
         {
-            ClickEnter(SearchField);
-            return new SearchResultPage(driver);
+            DriverManager.ClickEnter(SearchField);
+            return new SearchResultPage(DriverManager);
         }
 
         public void AddTextToSearchField(string text)
         {
-            EnterText(SearchField, text);
-        }
-
-        public void QuitDriver()
-        {
-            driver.Quit();
+            DriverManager.EnterText(SearchField, text);
         }
     }
 }

@@ -1,21 +1,23 @@
 ﻿using Driver;
-using OpenQA.Selenium;
+using NUnit.Framework.Interfaces;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium.Chrome;
+
 
 namespace UnitTestWebDriver
 {
     [TestFixture]
     public class CalculatorTests
     {
-        public IWebDriver driver;
+        public WebDriverManager driverManager;
         public MainPage mainpage;
 
 
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
-            mainpage = new MainPage(driver);
+            driverManager = new WebDriverManager(new ChromeDriver());
+            mainpage = new MainPage(driverManager);
         }
 
         [Test]
@@ -38,10 +40,9 @@ namespace UnitTestWebDriver
             Thread.Sleep(1000);
             var expectedCost = computeEnginePage.GetCost();
             computeEnginePage.ClickShare();
-            computeEnginePage.ClickOpenEstimate();
+            var estimateSummaryPage = computeEnginePage.ClickOpenEstimate();
 
-            EstimateSummaryPage estimateSummaryPage = new EstimateSummaryPage(driver);
-            estimateSummaryPage.SwitchToTabWithTitle("Estimate");
+            estimateSummaryPage.SwitchToTab("Estimate");
 
             string actualCostEstimate = estimateSummaryPage.GetCostEstimateSummary();
 
@@ -51,7 +52,13 @@ namespace UnitTestWebDriver
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                var fileName = $"{DateTime.Now:yyyyMMdd-HHmmss}.png";
+                string screenshotPath = Path.Combine("..\\..\\..\\Screenshots", fileName);
+                driverManager.GetScreenshot().SaveAsFile(screenshotPath);
+            }
+            driverManager.QuitDriver();
         }
     }
 }

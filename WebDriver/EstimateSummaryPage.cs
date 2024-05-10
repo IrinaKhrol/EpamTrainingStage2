@@ -9,10 +9,10 @@ namespace Driver
 
         public string GetCostEstimateSummary()
         {
-            return driver.FindElement(CostEstimateSummaryLocator).Text;
+            return DriverManager.GetText (CostEstimateSummaryLocator);
         }
 
-        public EstimateSummaryPage(IWebDriver driver) : base(driver)
+        public EstimateSummaryPage(WebDriverManager driverManager) : base(driverManager)
         {
         }
     }
