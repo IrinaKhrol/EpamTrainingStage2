@@ -10,6 +10,7 @@ namespace Driver
     {
         private readonly WebDriverWait wait;
         private readonly IWebDriver driver;
+        public IWebDriver Driver {get;}
 
         public WebDriverManager(IWebDriver driver)
         {
@@ -23,20 +24,20 @@ namespace Driver
             driver.Manage().Window.Maximize();
         }
 
-        public void ClickElement(By locator)
+        public void ClickElement(IWebElement element)
         {
-            wait.Until(ExpectedConditions.ElementToBeClickable(locator));
-            driver.FindElement(locator).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(element));
+            element.Click();
         }
 
-        public void EnterText(By locator, string text)
+        public void EnterText(IWebElement element, string text)
         {
-            driver.FindElement(locator).SendKeys(text);
+            element.SendKeys(text);
         }
 
-        public void ClickEnter(By locator)
+        public void ClickEnter(IWebElement element)
         {
-            driver.FindElement(locator).SendKeys(Keys.Enter);
+            element.SendKeys(Keys.Enter);
         }
 
         public void ScrollDown()
@@ -65,9 +66,9 @@ namespace Driver
             throw new NotFoundException($"Tab with title '{title}' was not found.");
         }
 
-        public string GetText(By locator)
+        public string GetText(IWebElement element)
         {
-            return driver.FindElement(locator).Text;
+            return element.Text;
         }
 
         public Screenshot GetScreenshot()

@@ -1,42 +1,59 @@
 ﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
 
 namespace Driver
 {
     public class ComputeEnginePage : BasePage
     {
-        protected By NumberOfInstances = By.CssSelector("div[jsaction='JIbuQc:qGgAE'] button");
+        #region locators
+        [FindsBy(How = How.CssSelector, Using = "div[jsaction='JIbuQc:qGgAE'] button")]
+        public IWebElement InstancesField;
 
-        protected By MashineType = By.CssSelector("div[jsname=kgDJk]");
+        [FindsBy(How = How.CssSelector, Using = "div[jsname=kgDJk]")]
+        public IWebElement MachineTypeField;
 
-        protected By ChooseMashineType = By.XPath("/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[11]/div/div/div[2]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[7]");
+        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[11]/div/div/div[2]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[7]")]
+        public IWebElement ChooseMachineType;
 
-        protected By SelectAddGPUs = By.CssSelector("[aria-label='Add GPUs']");
+        [FindsBy(How = How.CssSelector, Using = "[aria-label='Add GPUs']")]
+        public IWebElement SelectAddGPUs;
 
-        protected By ClickGPUType = By.CssSelector("[data-field-type='158'] .VfPpkd-aPP78e");
+        [FindsBy(How = How.CssSelector, Using = "[data-field-type='158'] .VfPpkd-aPP78e")]
+        public IWebElement ClickGPUType;
 
-        protected By ChooseGPUType = By.XPath("/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[23]/div/div[1]/div/div/div/div[2]/ul/li[3]");
+        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[23]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
+        public IWebElement ChooseGPUType;
 
-        protected By ClickLocalSSD = By.XPath("/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[1]/div");
+        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[1]/div")]
+        public IWebElement ClickLocalSSD;
 
-        protected By ChooseLocalSSD = By.XPath("/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[2]/ul/li[3]");
+        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
+        public IWebElement ChooseLocalSSD;
 
-        protected By ChooseCommitedUsage = By.CssSelector("label.zT2df[for='1-year']");
+        [FindsBy(How = How.CssSelector, Using = "label.zT2df[for='1-year']")]
+        public IWebElement ChooseCommitedUsage;
 
-        protected By Share = By.CssSelector("span.FOBRw-vQzf8d[jsname='V67aGc']");
+        [FindsBy(How = How.CssSelector, Using = "span.FOBRw-vQzf8d[jsname='V67aGc']")]
+        public IWebElement Share;
 
-        protected By OpenEstimate = By.CssSelector("a.tltOzc.MExMre.rP2xkc.jl2ntd[track-name='open estimate summary']");
+        [FindsBy(How = How.CssSelector, Using = "a.tltOzc.MExMre.rP2xkc.jl2ntd[track-name='open estimate summary']")]
+        public IWebElement OpenEstimate;
 
-        protected By Cost = By.CssSelector("label.gt0C8e.MyvX5d.D0aEmf");
+        [FindsBy(How = How.CssSelector, Using = "label.gt0C8e.MyvX5d.D0aEmf")]
+        public IWebElement CostLocator;
+        #endregion
+
 
         public ComputeEnginePage(WebDriverManager driverManager) : base(driverManager)
         {
+            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public void ClickNumberOfInstances(int count)
         {
             for (int i = 0; i < count; i++)
             {
-                DriverManager.ClickElement(NumberOfInstances);
+                DriverManager.ClickElement(InstancesField);
             }
         }
 
@@ -44,12 +61,12 @@ namespace Driver
         {
             DriverManager.ScrollDown();
             DriverManager.HideCookieNotification();
-            DriverManager.ClickElement(MashineType);
+            DriverManager.ClickElement(MachineTypeField);
         }
 
         public void ClickChooseMashineType()
         {
-            DriverManager.ClickElement(ChooseMashineType);
+            DriverManager.ClickElement(ChooseMachineType);
         }
 
         public void ClickSelectAddGps()
@@ -98,7 +115,7 @@ namespace Driver
 
         public string GetCost() 
         {
-            return DriverManager.GetText(Cost);
+            return DriverManager.GetText(CostLocator);
         }
     }
 }

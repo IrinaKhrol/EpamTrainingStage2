@@ -1,12 +1,16 @@
 ﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
 
 namespace Driver
 {
     public class WelcomePricingCalculator : BasePage
     {
-        protected By AddToEstimateButton = By.CssSelector("span.UywwFc-vQzf8d[jsname='V67aGc']");
+        [FindsBy(How = How.CssSelector, Using = "span.UywwFc-vQzf8d[jsname='V67aGc']")]
+        protected IWebElement AddToEstimateButton;
 
-        protected By ComputeEngineItem = By.CssSelector("div[data-service-form='8']");
+        [FindsBy(How = How.CssSelector, Using = "div[data-service-form='8']")]
+        protected IWebElement ComputeEngineItem;
+
 
         public WelcomePricingCalculator(WebDriverManager driverManager) : base(driverManager)
         {

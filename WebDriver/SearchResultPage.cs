@@ -1,10 +1,13 @@
 ﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
 
 namespace Driver
 {
     public class SearchResultPage : BasePage
     {
-        protected By PricingCalculator = By.CssSelector("a.gs-title[href*='cloud.google.com/products/calculator']");
+        [FindsBy(How = How.CssSelector, Using = "a.gs-title[href*='cloud.google.com/products/calculator']")]
+        protected IWebElement PricingCalculator;
+
         public SearchResultPage(WebDriverManager driverManager) : base(driverManager)
         {
         }

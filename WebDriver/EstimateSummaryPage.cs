@@ -1,11 +1,13 @@
 ﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
 
 namespace Driver
 {
     public class EstimateSummaryPage : BasePage
     {
+        [FindsBy(How = How.CssSelector, Using = ".OtcLZb.OIcOye")]
+        protected IWebElement CostEstimateSummaryLocator;
 
-        protected By CostEstimateSummaryLocator = By.CssSelector(".OtcLZb.OIcOye");
 
         public string GetCostEstimateSummary()
         {
