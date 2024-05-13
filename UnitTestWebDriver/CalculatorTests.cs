@@ -3,7 +3,6 @@ using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium.Chrome;
 
-
 namespace UnitTestWebDriver
 {
     [TestFixture]
@@ -20,23 +19,20 @@ namespace UnitTestWebDriver
             mainpage = new MainPage(driverManager);
         }
 
-        [Test]
-        public void TestCalculatorPriceAndSummary()
+        [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData1.json")]
+        [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData2.json")]
+        public void ComputeEngineSetup(string jsonFilePath)
         {
+            JsonReader jsonReader = new JsonReader();
+            FormData formData = jsonReader.ReadFormData(jsonFilePath);
+
             mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
             var searchResult = mainpage.OpenSurchResult();
             var welcomePricingCalcilator = searchResult.ClickPricingCalculatorLink();
             welcomePricingCalcilator.ClickAddToEstimateButton();
             var computeEnginePage = welcomePricingCalcilator.ClickComputeEngineItem();
             computeEnginePage.ClickNumberOfInstances(3);
-            computeEnginePage.ClickMashineType();
-            computeEnginePage.ClickChooseMashineType();
-            computeEnginePage.ClickSelectAddGps();
-            computeEnginePage.ClickChooseGPUType();
-            computeEnginePage.AddGPUType();
-            computeEnginePage.ClickChooseLocalSSD();
-            computeEnginePage.AddLocalSSD();
-            computeEnginePage.ClickCommitedUsage();
+            computeEnginePage.PerformCalculation();
             Thread.Sleep(1000);
             var expectedCost = computeEnginePage.GetCost();
             computeEnginePage.ClickShare();

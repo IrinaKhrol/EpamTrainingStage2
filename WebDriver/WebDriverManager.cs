@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -10,7 +9,7 @@ namespace Driver
     {
         private readonly WebDriverWait wait;
         private readonly IWebDriver driver;
-        public IWebDriver Driver {get;}
+        public IWebDriver Driver { get { return driver; } }
 
         public WebDriverManager(IWebDriver driver)
         {

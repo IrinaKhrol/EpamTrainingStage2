@@ -7,40 +7,40 @@ namespace Driver
     {
         #region locators
         [FindsBy(How = How.CssSelector, Using = "div[jsaction='JIbuQc:qGgAE'] button")]
-        public IWebElement InstancesField;
+        private IWebElement InstancesField;
 
         [FindsBy(How = How.CssSelector, Using = "div[jsname=kgDJk]")]
-        public IWebElement MachineTypeField;
+        private IWebElement MachineTypeField;
 
         [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[11]/div/div/div[2]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[7]")]
-        public IWebElement ChooseMachineType;
+        private IWebElement ChooseMachineType;
 
         [FindsBy(How = How.CssSelector, Using = "[aria-label='Add GPUs']")]
-        public IWebElement SelectAddGPUs;
+        private IWebElement SelectAddGPUs;
 
         [FindsBy(How = How.CssSelector, Using = "[data-field-type='158'] .VfPpkd-aPP78e")]
-        public IWebElement ClickGPUType;
+        private IWebElement ClickGPUType;
 
         [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[23]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
-        public IWebElement ChooseGPUType;
+        private IWebElement ChooseGPUType;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[1]/div")]
-        public IWebElement ClickLocalSSD;
+        [FindsBy(How = How.CssSelector, Using = "[data-field-type='180']")]
+        private IWebElement ClickLocalSSD;
 
         [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
-        public IWebElement ChooseLocalSSD;
+        private IWebElement ChooseLocalSSD;
 
         [FindsBy(How = How.CssSelector, Using = "label.zT2df[for='1-year']")]
-        public IWebElement ChooseCommitedUsage;
+        private IWebElement ChooseCommitedUsage;
 
         [FindsBy(How = How.CssSelector, Using = "span.FOBRw-vQzf8d[jsname='V67aGc']")]
-        public IWebElement Share;
+        private IWebElement Share;
 
         [FindsBy(How = How.CssSelector, Using = "a.tltOzc.MExMre.rP2xkc.jl2ntd[track-name='open estimate summary']")]
-        public IWebElement OpenEstimate;
+        private IWebElement OpenEstimate;
 
         [FindsBy(How = How.CssSelector, Using = "label.gt0C8e.MyvX5d.D0aEmf")]
-        public IWebElement CostLocator;
+        private IWebElement CostLocator;
         #endregion
 
 
@@ -57,50 +57,22 @@ namespace Driver
             }
         }
 
-        public void ClickMashineType()
+        public void PerformCalculation()
         {
             DriverManager.ScrollDown();
             DriverManager.HideCookieNotification();
             DriverManager.ClickElement(MachineTypeField);
-        }
-
-        public void ClickChooseMashineType()
-        {
             DriverManager.ClickElement(ChooseMachineType);
-        }
-
-        public void ClickSelectAddGps()
-        {
             DriverManager.ScrollDown();
             DriverManager.HideCookieNotification();
-            Thread.Sleep(1000);
             DriverManager.ClickElement(SelectAddGPUs);
-        }
-
-        public void ClickChooseGPUType()
-        {
             DriverManager.ClickElement(ClickGPUType);
-        }
-
-        public void AddGPUType()
-        {
             DriverManager.ClickElement(ChooseGPUType);
-        }
-
-        public void ClickChooseLocalSSD()
-        {
             DriverManager.ClickElement(ClickLocalSSD);
-        }
-
-        public void AddLocalSSD()
-        {
             DriverManager.ClickElement(ChooseLocalSSD);
-        }
-
-        public void ClickCommitedUsage()
-        {
             DriverManager.ClickElement(ChooseCommitedUsage);
         }
+
 
         public void ClickShare()
         {

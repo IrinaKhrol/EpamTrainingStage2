@@ -8,7 +8,7 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "div.YSM5S")]
         protected IWebElement SearchIcon;
 
-        [FindsBy(How = How.CssSelector, Using = "input[type='text'][aria-label='Search']")]
+        [FindsBy(How = How.CssSelector, Using = "input.mb2a7b")]
         protected IWebElement SearchField;
 
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Google Cloud Platform Pricing Calculator')]")]
@@ -17,6 +17,7 @@ namespace Driver
 
         public MainPage(WebDriverManager driverManager) : base(driverManager)
         {
+            PageFactory.InitElements(DriverManager.Driver, this);
             DriverManager.NavigateToUrl("https://cloud.google.com/");
         }
 

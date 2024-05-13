@@ -16,6 +16,7 @@ namespace Driver
 
         public EstimateSummaryPage(WebDriverManager driverManager) : base(driverManager)
         {
+            PageFactory.InitElements(DriverManager.Driver, this);
         }
     }
 }

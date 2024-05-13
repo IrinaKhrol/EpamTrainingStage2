@@ -14,6 +14,7 @@ namespace Driver
 
         public WelcomePricingCalculator(WebDriverManager driverManager) : base(driverManager)
         {
+            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public void ClickAddToEstimateButton()

@@ -10,6 +10,7 @@ namespace Driver
 
         public SearchResultPage(WebDriverManager driverManager) : base(driverManager)
         {
+            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public WelcomePricingCalculator ClickPricingCalculatorLink()

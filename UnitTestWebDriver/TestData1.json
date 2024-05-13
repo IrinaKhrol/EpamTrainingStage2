@@ -1,0 +1,15 @@
+﻿{
+  "NumberOfInstances": 4,
+  "InstancesPurpose": "",
+  "OperatingSystem": "Free: Debian",
+  "ProvisioningModel": "Regular",
+  "MachineFamily": "General purpose",
+  "Series": "N1",
+  "MachineType": "n1-standard-8",
+  "AddGPUs": true,
+  "GPUType": "NVIDIA Tesla V100",
+  "NumberOfGPUs": 1,
+  "LocalSSD": "2x375 Gb",
+  "DatacenterLocation": "Frankfurt (europe-west3)",
+  "CommittedUsage": "1 Year"
+}

@@ -6,34 +6,34 @@ namespace Driver
     {
         #region locators
         [FindsBy(How = How.XPath, Using = "//input[@ng-model='listingCtrl.computeServer.quantity']")]
-        public IWebElement InstancesField;
+        private IWebElement InstancesField;
 
         [FindsBy(How = How.XPath, Using = "//md-select[@ng-model='listingCtrl.computeServer.series']")]
-        public IWebElement SeriesField;
+        private IWebElement SeriesField;
 
         [FindsBy(How = How.XPath, Using = "//md-select[@ng-model='listingCtrl.computeServer.machineType']")]
-        public IWebElement MachineTypeField;
+        private IWebElement MachineTypeField;
 
         [FindsBy(How = How.XPath, Using = "//button[@ng-click='listingCtrl.addComputeServer(listingCtrl.computeServer)']")]
-        public IWebElement AddToEstimateButton;
+        private IWebElement AddToEstimateButton;
 
         [FindsBy(How = How.XPath, Using = "//md-select[@ng-model='listingCtrl.computeServer.gpuType']")]
-        public IWebElement GPUTypeField;
+        private IWebElement GPUTypeField;
 
         [FindsBy(How = How.XPath, Using = "//md-select[@ng-model='listingCtrl.computeServer.localSsd']")]
-        public IWebElement LocalSSDField;
+        private IWebElement LocalSSDField;
 
         [FindsBy(How = How.XPath, Using = "//md-select[@ng-model='listingCtrl.computeServer.commitmentTerm']")]
-        public IWebElement CommitedUsageField;
+        private IWebElement CommitedUsageField;
 
         [FindsBy(How = How.XPath, Using = "//form[@name='emailForm']")]
-        public IWebElement ShareField;
+        private IWebElement ShareField;
 
         [FindsBy(How = How.XPath, Using = "//button[@ng-click='listingCtrl.openEmailForm()']")]
-        public IWebElement OpenEstimateField;
+        private IWebElement OpenEstimateField;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='md-list-item-text ng-binding']")]
-        public IWebElement CostLocator;
+        private IWebElement CostLocator;
         #endregion
         public PricingCalculatorPage(WebDriverManager DriverManager) : base(DriverManager)
         {
@@ -83,7 +83,7 @@ namespace Driver
         public EstimateSummaryPage ReturnToEstimate()
         {
             ClickOpenEstimate();
-            //driver.SwitchTo().Alert().Accept();
+
             return new EstimateSummaryPage(DriverManager);
         }
     }
