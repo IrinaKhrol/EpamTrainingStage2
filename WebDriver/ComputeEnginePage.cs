@@ -12,7 +12,7 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "div[jsname=kgDJk]")]
         private IWebElement MachineTypeField;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[11]/div/div/div[2]/div/div[1]/div[3]/div/div/div/div[2]/ul/li[7]")]
+        [FindsBy(How = How.CssSelector, Using = "ul.VfPpkd-rymPhb")]
         private IWebElement ChooseMachineType;
 
         [FindsBy(How = How.CssSelector, Using = "[aria-label='Add GPUs']")]
@@ -21,13 +21,13 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "[data-field-type='158'] .VfPpkd-aPP78e")]
         private IWebElement ClickGPUType;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[23]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
+        [FindsBy(How = How.CssSelector, Using = "[aria-label='Add GPUs']")]
         private IWebElement ChooseGPUType;
 
         [FindsBy(How = How.CssSelector, Using = "[data-field-type='180']")]
         private IWebElement ClickLocalSSD;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/c-wiz[1]/div/div/div[1]/div/div/div/div/div/div/div/div[1]/div/div[2]/div[3]/div[27]/div/div[1]/div/div/div/div[2]/ul/li[3]")]
+        [FindsBy(How = How.CssSelector, Using = "[aria-label='Local SSD']")]
         private IWebElement ChooseLocalSSD;
 
         [FindsBy(How = How.CssSelector, Using = "label.zT2df[for='1-year']")]
@@ -51,25 +51,25 @@ namespace Driver
 
         public void ClickNumberOfInstances(int count)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 1; i < count; i++)
             {
                 DriverManager.ClickElement(InstancesField);
             }
         }
 
-        public void PerformCalculation()
+        public void PerformCalculation(string machineType, string gpuType, string localSSD )
         {
             DriverManager.ScrollDown();
             DriverManager.HideCookieNotification();
             DriverManager.ClickElement(MachineTypeField);
-            DriverManager.ClickElement(ChooseMachineType);
+            DriverManager.SelectValueInDropdown(ChooseMachineType, machineType);
             DriverManager.ScrollDown();
             DriverManager.HideCookieNotification();
             DriverManager.ClickElement(SelectAddGPUs);
             DriverManager.ClickElement(ClickGPUType);
-            DriverManager.ClickElement(ChooseGPUType);
+            DriverManager.SelectValueInDropdown(ChooseGPUType, gpuType);
             DriverManager.ClickElement(ClickLocalSSD);
-            DriverManager.ClickElement(ChooseLocalSSD);
+            DriverManager.SelectInDropdown(ChooseLocalSSD, localSSD);
             DriverManager.ClickElement(ChooseCommitedUsage);
         }
 

@@ -82,6 +82,20 @@ namespace Driver
             }
         }
 
+        public void SelectValueInDropdown(IWebElement element, string value)
+        {
+            string xpath = $"//li[@data-value='{value}']";
+            wait.Until(ExpectedConditions.ElementExists(By.XPath(xpath)));
+            element.FindElement(By.XPath(xpath)).Click();
+        }
+
+        public void SelectInDropdown(IWebElement element, string value)
+        {
+            string selector = $"li[data-value='{value}']";
+            wait.Until(ExpectedConditions.ElementExists(By.CssSelector(selector)));
+            element.FindElement(By.CssSelector(selector)).Click();
+        }
+
         public void QuitDriver()
         {
             if (driver != null)

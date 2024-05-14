@@ -10,6 +10,7 @@ namespace UnitTestWebDriver
     {
         public WebDriverManager driverManager;
         public MainPage mainpage;
+        public JsonReader jsonReader;
 
 
         [SetUp]
@@ -17,13 +18,13 @@ namespace UnitTestWebDriver
         {
             driverManager = new WebDriverManager(new ChromeDriver());
             mainpage = new MainPage(driverManager);
+            jsonReader = new JsonReader();
         }
 
         [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData1.json")]
         [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData2.json")]
         public void ComputeEngineSetup(string jsonFilePath)
         {
-            JsonReader jsonReader = new JsonReader();
             FormData formData = jsonReader.ReadFormData(jsonFilePath);
 
             mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
@@ -31,8 +32,8 @@ namespace UnitTestWebDriver
             var welcomePricingCalcilator = searchResult.ClickPricingCalculatorLink();
             welcomePricingCalcilator.ClickAddToEstimateButton();
             var computeEnginePage = welcomePricingCalcilator.ClickComputeEngineItem();
-            computeEnginePage.ClickNumberOfInstances(3);
-            computeEnginePage.PerformCalculation();
+            computeEnginePage.ClickNumberOfInstances(formData.NumberOfInstances);
+            computeEnginePage.PerformCalculation(formData.MachineType, formData.GPUType, formData.LocalSSD);
             Thread.Sleep(1000);
             var expectedCost = computeEnginePage.GetCost();
             computeEnginePage.ClickShare();
