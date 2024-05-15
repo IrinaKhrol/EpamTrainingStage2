@@ -1,0 +1,15 @@
+﻿{
+  "NumberOfInstances": 2,
+  "InstancesPurpose": "Testing",
+  "OperatingSystem": "Free: CentOS",
+  "ProvisioningModel": "Regular",
+  "MachineFamily": "General purpose",
+  "Series": "N2",
+  "MachineType": "n2-standard-4",
+  "AddGPUs": false,
+  "GPUType": "",
+  "NumberOfGPUs": 0,
+  "LocalSSD": "1x500 Gb",
+  "DatacenterLocation": "Singapore (asia-southeast1)",
+  "CommittedUsage": "3 Years"
+}
