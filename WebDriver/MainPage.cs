@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using Core;
 
 namespace Driver
 {
@@ -14,10 +15,8 @@ namespace Driver
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Google Cloud Platform Pricing Calculator')]")]
         protected IWebElement PricingCalculatorLink;
 
-
         public MainPage(WebDriverManager driverManager) : base(driverManager)
         {
-            PageFactory.InitElements(DriverManager.Driver, this);
             DriverManager.NavigateToUrl("https://cloud.google.com/");
         }
 

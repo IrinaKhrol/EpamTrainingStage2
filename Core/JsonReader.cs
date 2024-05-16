@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Driver
+namespace Core
 {
     public class JsonReader
     {
@@ -10,7 +10,6 @@ namespace Driver
             {
                 throw new FileNotFoundException("The specified file does not exist.", filePath);
             }
-
             try
             {
                 string json = File.ReadAllText(filePath);

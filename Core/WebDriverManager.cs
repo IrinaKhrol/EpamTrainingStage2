@@ -3,7 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-namespace Driver
+namespace Core
 {
     public class WebDriverManager
     {
@@ -94,6 +94,11 @@ namespace Driver
             string selector = $"li[data-value='{value}']";
             wait.Until(ExpectedConditions.ElementExists(By.CssSelector(selector)));
             element.FindElement(By.CssSelector(selector)).Click();
+        }
+
+        public void RefreshPage() 
+        {
+            driver.Navigate().Refresh();
         }
 
         public void QuitDriver()

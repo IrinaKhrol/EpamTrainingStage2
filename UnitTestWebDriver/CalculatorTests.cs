@@ -2,6 +2,7 @@
 using NUnit.Framework.Interfaces;
 using NUnit.Framework.Internal;
 using OpenQA.Selenium.Chrome;
+using Core;
 
 namespace UnitTestWebDriver
 {
@@ -21,10 +22,12 @@ namespace UnitTestWebDriver
             jsonReader = new JsonReader();
         }
 
-        [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData1.json")]
-        [TestCase("C:\\Users\\Irina\\source\\repos\\EpamTrainingStage2\\UnitTestWebDriver\\TestData2.json")]
-        public void ComputeEngineSetup(string jsonFilePath)
+        [TestCase("TestData1.json")]
+        [TestCase("TestData2.json")]
+        public void ComputeEngineSetup(string jsonFileName)
         {
+            string jsonFilePath = Path.Combine(Directory.GetCurrentDirectory(), jsonFileName);
+
             FormData formData = jsonReader.ReadFormData(jsonFilePath);
 
             mainpage.AddTextToSearchField("Google Cloud Platform Pricing Calculator");
@@ -34,7 +37,6 @@ namespace UnitTestWebDriver
             var computeEnginePage = welcomePricingCalcilator.ClickComputeEngineItem();
             computeEnginePage.ClickNumberOfInstances(formData.NumberOfInstances);
             computeEnginePage.PerformCalculation(formData.MachineType, formData.GPUType, formData.LocalSSD);
-            Thread.Sleep(1000);
             var expectedCost = computeEnginePage.GetCost();
             computeEnginePage.ClickShare();
             var estimateSummaryPage = computeEnginePage.ClickOpenEstimate();

@@ -1,4 +1,4 @@
-﻿namespace Driver
+﻿namespace Core
 {
     public class FormData
     {

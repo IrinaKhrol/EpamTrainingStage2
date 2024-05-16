@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using Core;
 
 namespace Driver
 {
@@ -10,7 +11,6 @@ namespace Driver
 
         public SearchResultPage(WebDriverManager driverManager) : base(driverManager)
         {
-            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public WelcomePricingCalculator ClickPricingCalculatorLink()

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using Core;
 
 namespace Driver
 {
@@ -11,10 +12,8 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "div[data-service-form='8']")]
         protected IWebElement ComputeEngineItem;
 
-
         public WelcomePricingCalculator(WebDriverManager driverManager) : base(driverManager)
         {
-            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public void ClickAddToEstimateButton()

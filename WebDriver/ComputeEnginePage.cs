@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using Core;
 
 namespace Driver
 {
@@ -9,7 +10,7 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "div[jsaction='JIbuQc:qGgAE'] button")]
         private IWebElement InstancesField;
 
-        [FindsBy(How = How.CssSelector, Using = "div[jsname=kgDJk]")]
+        [FindsBy(How = How.XPath, Using = "//div[@jsname='kgDJk']")]
         private IWebElement MachineTypeField;
 
         [FindsBy(How = How.CssSelector, Using = "ul.VfPpkd-rymPhb")]
@@ -21,7 +22,7 @@ namespace Driver
         [FindsBy(How = How.CssSelector, Using = "[data-field-type='158'] .VfPpkd-aPP78e")]
         private IWebElement ClickGPUType;
 
-        [FindsBy(How = How.CssSelector, Using = "[aria-label='Add GPUs']")]
+        [FindsBy(How = How.XPath, Using = "//*[@aria-label='Add GPUs']")]
         private IWebElement ChooseGPUType;
 
         [FindsBy(How = How.CssSelector, Using = "[data-field-type='180']")]
@@ -46,7 +47,6 @@ namespace Driver
 
         public ComputeEnginePage(WebDriverManager driverManager) : base(driverManager)
         {
-            PageFactory.InitElements(DriverManager.Driver, this);
         }
 
         public void ClickNumberOfInstances(int count)
@@ -73,9 +73,9 @@ namespace Driver
             DriverManager.ClickElement(ChooseCommitedUsage);
         }
 
-
         public void ClickShare()
         {
+            DriverManager.HideCookieNotification();
             DriverManager.ClickElement(Share);
         }
 
@@ -87,6 +87,7 @@ namespace Driver
 
         public string GetCost() 
         {
+            DriverManager.RefreshPage();
             return DriverManager.GetText(CostLocator);
         }
     }
